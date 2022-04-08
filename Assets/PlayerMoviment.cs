@@ -74,4 +74,9 @@ public class PlayerMoviment : MonoBehaviour
             jumpCounter = 2;
         }
     }
+
+    public void ResetPlayerPosition() {
+        Debug.Log("PEGOU");
+        transform.position = new Vector3(-4.02f, 1.55f, 0f);
+    }
 }

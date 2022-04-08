@@ -22,7 +22,7 @@ public class CheckBallCollider : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) {
         int water = 4;
-        if(other.gameObject.layer != water){
+        if(other.gameObject.layer != water){            
             Physics2D.IgnoreCollision(wall, other.collider);
         }
     }
