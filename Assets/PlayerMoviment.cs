@@ -20,6 +20,7 @@ public class PlayerMoviment : MonoBehaviour
     public int movementSpeed = 300;
 
     private int jumpCounter = 2;
+    int punchHash = Animator.StringToHash("isPunch");
 
     void Start()
     {
@@ -42,6 +43,10 @@ public class PlayerMoviment : MonoBehaviour
             }
         }
         
+        if (Input.GetMouseButtonDown(0)){
+            anim.SetTrigger(punchHash);
+        }
+
     }
 
     private void HorizontalMoviment(){
