@@ -12,10 +12,14 @@ public class PlayerMoviment : MonoBehaviour
     public LayerMask groundLayer;
     private Rigidbody2D rb;
     private SpriteRenderer sp;
-    private SpriteRenderer[] spLegs;
+    private SpriteRenderer[] spChildren;
     private Animator anim;
 
+    private double zero = 10e-6;
+
     private Collision2D player;
+
+    private GameObject playerObject;
 
     public int movementSpeed = 300;
 
@@ -26,8 +30,9 @@ public class PlayerMoviment : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
-        spLegs = this.GetComponentsInChildren<SpriteRenderer>(); 
+        spChildren = this.GetComponentsInChildren<SpriteRenderer>(); 
         anim = gameObject.GetComponent<Animator>();
+        playerObject = this.gameObject;
     }
 
 
@@ -53,21 +58,25 @@ public class PlayerMoviment : MonoBehaviour
         float x = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         anim.SetFloat("speed", speed);
         
-        if(Mathf.Abs(x) <= 10e-6){
+        if(Mathf.Abs(x) <= zero){
             anim.SetFloat("speed", 0);
-        }else if(x > 10e-6){
-            sp.flipX = false;
-            foreach (var spLeg in spLegs){
-                spLeg.flipX = false;
+        }else if(x > zero){
+            if(playerObject.transform.localScale.x < zero){
+                Flip();
             }
-        }else if(x < -10e-6){
-            sp.flipX = true;
-            foreach (var spLeg in spLegs){
-                spLeg.flipX = true;
+        }else if(x < -zero){
+            if(playerObject.transform.localScale.x >= zero){
+                Flip();
             }
         }
 
         rb.velocity = new Vector2(x*movementSpeed, rb.velocity.y);
+    }
+
+    private void Flip(){
+        Vector3 scale = playerObject.transform.localScale;
+        scale.x  *= -1;
+        playerObject.transform.localScale = scale;
     }
 
     void Jump(){
