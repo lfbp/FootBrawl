@@ -6,12 +6,12 @@ public class CheckGoal : MonoBehaviour
 {
 
     Rigidbody2D ball;
-    GameObject playerBlu;
+    GameObject menu;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerBlu = GameObject.Find("Player Blu");
+        menu = GameObject.Find("Menu");
     }
 
     // Update is called once per frame
@@ -26,10 +26,10 @@ public class CheckGoal : MonoBehaviour
 
             ball.freezeRotation = true;
             ball.velocity = new Vector2(0, 0);
-            transform.position = new Vector3(-1.4089f, 3.7411f, 0f);
+            transform.position = new Vector3(-1.36f, 0.45f, 0f);
             ball.freezeRotation = false;
 
-            playerBlu.SendMessage("ResetPlayerPosition");
+            menu.SendMessage("ResetPlayersPositions");
 
             Debug.Log("GOOOOOOOOOOOOOOOOOOOOOOL");
         }
