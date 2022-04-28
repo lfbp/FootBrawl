@@ -2371,6 +2371,7 @@ GameObject:
   - component: {fileID: 1328952754}
   - component: {fileID: 1328952755}
   - component: {fileID: 1328952756}
+  - component: {fileID: 1328952757}
   m_Layer: 0
   m_Name: LeftGoal
   m_TagString: Untagged
@@ -2490,6 +2491,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1328952757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328952752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a222d9485395d46978c144ca3239ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1367474569
 GameObject:
   m_ObjectHideFlags: 0
