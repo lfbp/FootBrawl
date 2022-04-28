@@ -6,7 +6,7 @@ public class PlayerMoviment : MonoBehaviour
 {
     // Start is called before the first frame update
     public float speed = 10.0f;
-    public float jumpForce = 15.0f;
+    public float jumpForce;
     private bool doubleJump, isJumping, isGround;
     public Transform groundCheck;
     public LayerMask groundLayer;
@@ -22,6 +22,8 @@ public class PlayerMoviment : MonoBehaviour
     private GameObject playerObject;
 
     public int movementSpeed = 300;
+
+    float horizontalMove = 0f;
 
     private int jumpCounter = 2;
     int punchHash = Animator.StringToHash("isPunch");
@@ -54,23 +56,25 @@ public class PlayerMoviment : MonoBehaviour
 
     }
 
+    void FixedUpdate() {
+        rb.velocity = new Vector2(horizontalMove * Time.fixedDeltaTime, rb.velocity.y);
+    }
+
     private void HorizontalMoviment(){
-        float x = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        horizontalMove = Input.GetAxis("Horizontal") * movementSpeed;
         anim.SetFloat("speed", speed);
         
-        if(Mathf.Abs(x) <= zero){
+        if(Mathf.Abs(horizontalMove) <= zero){
             anim.SetFloat("speed", 0);
-        }else if(x > zero){
+        }else if(horizontalMove > zero){
             if(playerObject.transform.localScale.x < zero){
                 Flip();
             }
-        }else if(x < -zero){
+        }else if(horizontalMove < -zero){
             if(playerObject.transform.localScale.x >= zero){
                 Flip();
             }
         }
-
-        rb.velocity = new Vector2(x*movementSpeed, rb.velocity.y);
     }
 
     private void Flip(){
@@ -90,7 +94,6 @@ public class PlayerMoviment : MonoBehaviour
     }
 
     public void ResetPlayerPosition() {
-        Debug.Log("PEGOU");
         transform.position = new Vector3(-4.02f, 1.55f, 0f);
     }
 }
