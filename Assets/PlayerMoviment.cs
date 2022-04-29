@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerMoviment : MonoBehaviour
+public class PlayerMoviment : NetworkBehaviour
 {
     // Start is called before the first frame update
     public float speed = 10.0f;
@@ -26,8 +27,16 @@ public class PlayerMoviment : MonoBehaviour
     private int jumpCounter = 2;
     int punchHash = Animator.StringToHash("isPunch");
 
-    void Start()
-    {
+    public NetworkVariable<Vector2> Velocity = new NetworkVariable<Vector2>();
+    public NetworkVariable<Vector3> Scale = new NetworkVariable<Vector3>();
+
+    public override void OnNetworkSpawn() {
+        if (IsOwner) {
+            ResetPlayerPosition();
+        }
+    }
+
+    void Start() {
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         spChildren = this.GetComponentsInChildren<SpriteRenderer>(); 
@@ -37,21 +46,24 @@ public class PlayerMoviment : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
-        HorizontalMoviment();
-        
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            if(jumpCounter > 0){
-                Jump();
-                jumpCounter--;
+    void Update() {
+        if (IsOwner) {
+            HorizontalMoviment();
+
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                if(jumpCounter > 0){
+                    Jump();
+                    jumpCounter--;
+                }
+            }
+            
+            if (Input.GetMouseButtonDown(0)){
+                anim.SetTrigger(punchHash);
             }
         }
-        
-        if (Input.GetMouseButtonDown(0)){
-            anim.SetTrigger(punchHash);
-        }
 
+        playerObject.transform.localScale = Scale.Value;
+        rb.velocity = Velocity.Value;
     }
 
     private void HorizontalMoviment(){
@@ -60,27 +72,46 @@ public class PlayerMoviment : MonoBehaviour
         
         if(Mathf.Abs(x) <= zero){
             anim.SetFloat("speed", 0);
-        }else if(x > zero){
-            if(playerObject.transform.localScale.x < zero){
-                Flip();
-            }
-        }else if(x < -zero){
-            if(playerObject.transform.localScale.x >= zero){
-                Flip();
-            }
         }
+        else{
+            if(IsServer) {
+                if(x > zero){
+                    if(playerObject.transform.localScale.x < zero){
+                        Flip();
+                    }
+                }else if(x < -zero){
+                    if(playerObject.transform.localScale.x >= zero){
+                        Flip();
+                    }
+                }
+            }
+            else {
+                if(x > zero){
+                    if(playerObject.transform.localScale.x >= zero){
+                        Flip();
+                    }
+                }else if(x < -zero){
+                    if(playerObject.transform.localScale.x < zero){
+                        Flip();
+                    }
+                }
+            }
+        } 
 
-        rb.velocity = new Vector2(x*movementSpeed, rb.velocity.y);
+        SubmitVelocityRequestServerRpc(new Vector2(x*movementSpeed, rb.velocity.y));
+        // rb.velocity = new Vector2(x*movementSpeed, rb.velocity.y);
     }
 
     private void Flip(){
         Vector3 scale = playerObject.transform.localScale;
         scale.x  *= -1;
-        playerObject.transform.localScale = scale;
+        SubmitScaleRequestServerRpc(scale);
+        //playerObject.transform.localScale = scale;
     }
 
     void Jump(){
-        rb.velocity = Vector2.up * jumpForce;
+        SubmitJumpRequestServerRpc();
+        // rb.velocity = Vector2.up * jumpForce;
     }
     
     private void OnCollisionEnter2D(Collision2D other) {
@@ -90,7 +121,21 @@ public class PlayerMoviment : MonoBehaviour
     }
 
     public void ResetPlayerPosition() {
-        Debug.Log("PEGOU");
-        transform.position = new Vector3(-4.02f, 1.55f, 0f);
+        SubmitScaleRequestServerRpc(new Vector3(2.0228f, 2.0228f, 2.0228f));
+    }
+
+    [ServerRpc]
+    void SubmitVelocityRequestServerRpc(Vector2 position, ServerRpcParams rpcParams = default) {
+        Velocity.Value = position;
+    }
+
+    [ServerRpc]
+    void SubmitScaleRequestServerRpc(Vector3 scale, ServerRpcParams rpcParams = default) {
+        Scale.Value = scale;
+    }
+
+    [ServerRpc]
+    void SubmitJumpRequestServerRpc(ServerRpcParams rpcParams = default) {
+        Velocity.Value = Vector2.up * jumpForce;
     }
 }
