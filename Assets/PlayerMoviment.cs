@@ -43,14 +43,14 @@ public class PlayerMoviment : MonoBehaviour
     {
         HorizontalMoviment();
         
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.W)) {
             if(jumpCounter > 0){
                 Jump();
                 jumpCounter--;
             }
         }
         
-        if (Input.GetMouseButtonDown(0)){
+        if (Input.GetKeyDown(KeyCode.C)){
             anim.SetTrigger(punchHash);
         }
 
@@ -61,7 +61,7 @@ public class PlayerMoviment : MonoBehaviour
     }
 
     private void HorizontalMoviment(){
-        horizontalMove = Input.GetAxis("Horizontal") * movementSpeed;
+        horizontalMove = Input.GetAxis("Horizontal1") * movementSpeed;
         anim.SetFloat("speed", speed);
         
         if(Mathf.Abs(horizontalMove) <= zero){
@@ -90,6 +90,27 @@ public class PlayerMoviment : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.name == "Ground"){
             jumpCounter = 2;
+        }
+        if(other.gameObject.layer == 4){
+            if(Input.GetKey(KeyCode.S)){
+                if(other.rigidbody.velocity.x < 0){
+                    other.rigidbody.velocity = new Vector2(-8, 6);
+                }else{
+                    other.rigidbody.velocity = new Vector2(8, 6);
+                }
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other) {
+        if(other.gameObject.layer == 4){
+            if(Input.GetKey(KeyCode.S)){
+                if(other.rigidbody.velocity.x < 0){
+                    other.rigidbody.velocity = new Vector2(-8, 6);
+                }else{
+                    other.rigidbody.velocity = new Vector2(8, 6);
+                }
+            }
         }
     }
 

@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637865281793809946
+      ticks: 637873899641634272
     m_Hash: 1498389506
   m_LockFileStatus:
     m_FilePath: C:/Users/rafin/Documents/FootBrawl/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637865281793899955
+      ticks: 637873899641704271
     m_Hash: 1102651484
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
@@ -130,6 +130,7 @@ m_PackageAssets:
         - 8.0.0-pre.4
         - 8.0.0
         - 8.0.1
+        - 9.0.0-pre.1
         compatible:
         - 5.2.0
         - 5.2.1
@@ -340,6 +341,7 @@ m_PackageAssets:
         - 7.0.0-pre.3
         - 7.0.0-pre.4
         - 7.0.0
+        - 8.0.0-pre.1
         compatible:
         - 4.3.0
         verified: 4.3.0
@@ -538,6 +540,7 @@ m_PackageAssets:
         - 8.0.0-pre.4
         - 8.0.0-pre.5
         - 8.0.0
+        - 9.0.0-pre.1
         compatible:
         - 5.3.0
         verified: 5.3.0
@@ -706,6 +709,7 @@ m_PackageAssets:
         - 1.14.13
         - 1.14.15
         - 1.14.16
+        - 1.14.17
         - 1.15.1
         - 1.15.4
         - 1.15.7
@@ -714,6 +718,7 @@ m_PackageAssets:
         - 1.15.13
         - 1.15.15
         - 1.15.16
+        - 1.15.17
         - 2.0.0-preview.6
         - 2.0.0-preview.8
         - 2.0.0-preview.15
@@ -727,6 +732,7 @@ m_PackageAssets:
         compatible:
         - 1.15.15
         - 1.15.16
+        - 1.15.17
         - 2.0.0-preview.6
         - 2.0.0-preview.8
         - 2.0.0-preview.15
@@ -737,7 +743,7 @@ m_PackageAssets:
         - 2.1.0-preview.3
         - 2.1.0-preview.5
         - 2.1.0-preview.6
-        verified: 1.15.16
+        verified: 1.15.17
       dependencies:
       - name: com.unity.services.core
         version: 1.0.1
@@ -3396,6 +3402,8 @@ m_PackageAssets:
         - 1.1.0-pre.69
         - 1.2.0
         - 1.3.1
+        - 1.3.2
+        - 1.4.0
         compatible:
         - 1.0.1
         - 1.1.0-pre.7
@@ -3407,6 +3415,8 @@ m_PackageAssets:
         - 1.1.0-pre.69
         - 1.2.0
         - 1.3.1
+        - 1.3.2
+        - 1.4.0
         verified: 1.0.1
       dependencies:
       - name: com.unity.modules.unitywebrequest
@@ -3571,6 +3581,7 @@ m_PackageAssets:
         - 7.0.0-pre.3
         - 7.0.0-pre.4
         - 7.0.0
+        - 8.0.0-pre.1
         compatible:
         - 4.2.0
         verified: 4.2.0

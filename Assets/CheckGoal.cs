@@ -43,7 +43,12 @@ public class CheckGoal : MonoBehaviour
         ball.velocity = new Vector2(xSpeed, ySpeed);
 
         if(other.gameObject.name == "RightGoal" || other.gameObject.name == "LeftGoal") {
-
+            if(other.gameObject.name == "RightGoal"){
+                Score.scorePlayer1 += 1;
+            }
+            if(other.gameObject.name == "LeftGoal"){
+                Score.scorePlayer2 += 1;
+            }
             ball.freezeRotation = true;
             ball.velocity = new Vector2(0, 0);
             transform.position = new Vector3(-1.4089f, 3.7411f, 0f);
