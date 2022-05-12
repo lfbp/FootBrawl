@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 35323018}
   - component: {fileID: 35323017}
   m_Layer: 0
-  m_Name: Player red right leg
+  m_Name: Player right leg
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -977,7 +977,7 @@ GameObject:
   - component: {fileID: 512127098}
   - component: {fileID: 512127099}
   m_Layer: 0
-  m_Name: Player red left leg
+  m_Name: Player left leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1670,7 +1670,7 @@ GameObject:
   - component: {fileID: 820256962}
   - component: {fileID: 820256965}
   m_Layer: 0
-  m_Name: Player blu left leg
+  m_Name: Player left leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1754,7 +1754,7 @@ GameObject:
   - component: {fileID: 864954555}
   - component: {fileID: 864954554}
   m_Layer: 0
-  m_Name: Player blu right leg
+  m_Name: Player right leg
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2063,7 +2063,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145483038}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b773a25a69727d4419b523ff3f19c82a, type: 2}
   m_CullingMode: 0

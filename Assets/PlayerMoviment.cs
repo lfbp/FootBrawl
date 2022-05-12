@@ -115,6 +115,6 @@ public class PlayerMoviment : MonoBehaviour
     }
 
     public void ResetPlayerPosition() {
-        transform.position = new Vector3(-4.02f, 1.55f, 0f);
+        transform.position = new Vector3(-10.63f, 1.22f, 0f);
     }
 }

@@ -7,11 +7,13 @@ public class CheckGoal : MonoBehaviour
 
     Rigidbody2D ball;
     GameObject playerBlu;
+    GameObject playerRed;
     private float maxSpeed = 7.5f;
     // Start is called before the first frame update
     void Start()
     {
         playerBlu = GameObject.Find("Player Blu");
+        playerRed = GameObject.Find("Player Red");
         ball = GetComponent<Rigidbody2D> ();
     }
 
@@ -51,10 +53,11 @@ public class CheckGoal : MonoBehaviour
             }
             ball.freezeRotation = true;
             ball.velocity = new Vector2(0, 0);
-            transform.position = new Vector3(-1.4089f, 3.7411f, 0f);
+            transform.position = new Vector3(0f, 5f, 0f);
             ball.freezeRotation = false;
 
             playerBlu.SendMessage("ResetPlayerPosition");
+            playerRed.SendMessage("ResetPlayerPosition");
 
             SoundManagerScript.PlaySound("gol");
             golAnimation.setGolTrigger();
